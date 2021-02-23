@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const JWTValidator = ( req, res = response, next ) => {
   // x-token header
   const token = req.header('x-token');
-
+  console.log('token', token)
   if( !token ) {
     return res.status(401).json({
       ok: false,
