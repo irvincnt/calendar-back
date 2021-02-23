@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../models/User');
 const { JWTGenerator } = require('../helpers/jwt');
+const { JWTValidator } = require('../middlewares/jwtValidate');
 
 const crearUsuario = async(req, res = response) => {
   const { email, password } = req.body
@@ -85,9 +86,14 @@ const loginUsario = async(req, res = response) => {
 }
 
 const revalidarToken = (req, res = response) => {
+  const { name, uid } = req
+
   res.json({
     ok: true,
-    msg: 're validar usuario'
+    msg: 're validar usuario',
+    uid,
+    name,
+
   })
 }
 
