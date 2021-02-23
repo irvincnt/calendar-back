@@ -85,15 +85,14 @@ const loginUsario = async(req, res = response) => {
   }
 }
 
-const revalidarToken = (req, res = response) => {
+const revalidarToken = async(req, res = response) => {
   const { name, uid } = req
+
+  const token = await JWTGenerator(uid, name)
 
   res.json({
     ok: true,
-    msg: 're validar usuario',
-    uid,
-    name,
-
+    token
   })
 }
 
