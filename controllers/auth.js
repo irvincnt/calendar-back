@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../models/User');
 const { JWTGenerator } = require('../helpers/jwt');
-const { JWTValidator } = require('../middlewares/jwtValidate');
 
 const crearUsuario = async(req, res = response) => {
   const { email, password } = req.body

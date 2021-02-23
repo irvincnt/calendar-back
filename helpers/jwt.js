@@ -7,7 +7,6 @@ const JWTGenerator = (uid, name) => {
       expiresIn: '2h'
     }, (err, token) => {
       if(err) {
-        console.log(err);
         reject('No se pudo generar el toen');
       }
 
