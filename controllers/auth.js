@@ -3,18 +3,33 @@ const User = require('../models/User')
 
 const crearUsuario = async(req, res = response) => {
   const { name, email, password } = req.body
+  
+  try {
+    let user = await User.findOne({ email })
 
-  const user = new User( req.body )
+      if (user) {
+        return res.status(400).json({
+          ok: false,
+          msg: 'Un usuario ya existe con ese email'
+        })
+      }
 
-  await user.save();
-
-  res.status(201).json({
-    ok: true,
-    msg: 'registro',
-    name,
-    email,
-    password
-  })
+      user = new User( req.body )
+      await user.save();
+    
+      res.status(201).json({
+        ok: true,
+        msg: 'registro',
+        uid: user.id,
+        name: user.name
+      })
+    
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: error
+    })
+  }
 }
 
 const loginUsario = (req, res = response) => {
