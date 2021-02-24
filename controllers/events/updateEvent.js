@@ -9,14 +9,14 @@ const updateEvent = async(req, res = response) => {
     const event = await Event.findById(eventId);
 
     if (!event) {
-      res.status(404).json({
+      return res.status(404).json({
         ok: false,
         msg: 'El evento no existe'
       })
     }
 
     if (event.user.toString() !== uid) {
-      res.status(401).json({
+      return res.status(401).json({
         ok: false,
         msg: 'No tienes permisos para editar el evento'
       })
@@ -33,13 +33,13 @@ const updateEvent = async(req, res = response) => {
       { new: true} 
     )
 
-    res.status(200).json({
+    return res.status(200).json({
       ok: true,
       event: updatedEvent
     })
     
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       ok: false,
       msg: 'Error - Comunicate con el administrador'
     })

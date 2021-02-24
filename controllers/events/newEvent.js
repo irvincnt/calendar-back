@@ -9,12 +9,12 @@ const newEvent = async(req, res = response) => {
 
     const savedEvent = await event.save();
     
-    res.status(200).json({
+    return res.status(200).json({
       ok: true,
       event: savedEvent 
     })
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       ok: true,
       msg: 'Contactar al admin'
     })
